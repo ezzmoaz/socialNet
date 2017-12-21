@@ -1,4 +1,4 @@
-$(document).ready(function() {
+ $(document).ready(function() {
 
 	$('#search_text_input').focus(function() {
 		if(window.matchMedia( "(min-width: 800px)" ).matches) {
