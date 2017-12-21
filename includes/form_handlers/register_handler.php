@@ -131,7 +131,8 @@ if(isset($_POST['register_button'])){
 
         
         //INSERT INTO `users` VALUES (`id`, `first_name`, `last_name`, `nickname`, `email`, `password`, `phone_Num`, `phone_Num2`, `gender`, `DoB`, `profile_pic`, `hometown`, `marital_state`, `about_me`, `friend_array`, `user_closed`, `num_posts`, `num_likes`, `signup_date`)
-        $query = mysqli_query($con, "INSERT INTO `users` VALUES ('', '$fName', '$lName', '$nickname', '$email', '$password', '$phoneNum', '$phoneNum2', '$gender', '$DoB', '$profilePic', '$homeTown', '$MState', '$aboutMe', ',', 'NO', '0', '0', '$date')");
+        // INSERT INTO `users`(`email`, `first_name`, `last_name`, `nickname`, `password`, `gender`, `DoB`, `profile_pic`, `hometown`, `marital_state`, `about_me`, `friend_array`, `user_closed`, `num_posts`, `num_likes`, `signup_date`) VALUES ([value-1],[value-2],[value-3],[value-4],[value-5],[value-6],[value-7],[value-8],[value-9],[value-10],[value-11],[value-12],[value-13],[value-14],[value-15],[value-16])
+        $query = mysqli_query($con, "INSERT INTO `users` VALUES ('$email', '$fName', '$lName', '$nickname', '$password', '$gender', '$DoB', '$profilePic', '$homeTown', '$MState', '$aboutMe', ',', 'NO', '0', '0', '$date')");
 
         array_push($error_array, "<span >Sign UP is successful</span><br>");
 

@@ -10,7 +10,7 @@ if(isset($_GET['profile_email'])) {
 	if ($row == 0 ){
 		header("Location: index.php");
 	}
-
+	$user_main = new User($con, $userLoggedIn);
 	$num_friends = (substr_count($user_array['friend_array'], ",")) - 1;
 }
 	
@@ -48,7 +48,8 @@ if(isset($_POST['respond_request'])) {
  	</style>
 	
  	<div class="profile_left">
- 		<img src="<?php echo $user_array['profile_pic']; ?>">
+ 		<a href="upload.php"><img src="<?php echo $user_array['profile_pic']; ?>"></a>
+ 		
 
  		<div class="profile_info">
  			<p><?php echo "Posts: " . $user_array['num_posts']; ?></p>
@@ -56,6 +57,8 @@ if(isset($_POST['respond_request'])) {
  			<p><a href="friendsList.php">
 				<?php echo "Friends: " . $num_friends ?>
 			</a></p>
+			<p><?php if($user_main->isFriend($email))echo "About Me: " . $user_array['about_me']; ?></p>
+			<p><?php if($user_main->isFriend($email))echo "DoB: " . $user_array['DoB']; ?></p>
  		</div>
 
  		<form action="<?php echo "profile.php?profile_email=" . $email; ?>" method="POST">

@@ -35,8 +35,8 @@ class Post
 			if ($user_to == $added_by){
 				$user_to = "none";
 			}
-			
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', 'YES')");
+				
+			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', 'YES' , '')");
 			
 
 			$returned_id = mysqli_insert_id($this->con);
