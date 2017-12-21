@@ -1,8 +1,8 @@
 <?php
-include("includes/header.php"); //Header 
+include("includes/header.php"); //Header
 
-echo $_POST["user"];
-echo $_POST["accept"];
+// echo $_POST["user"];
+// echo $_POST["accept"];
 
 $user_from = $_POST["user"]; 
 if(isset($_POST["accept"])) {
@@ -30,7 +30,7 @@ else if($_POST['accept_request'.$user_from] == "Ignore") {
 
 	<h4>Friend Requests</h4>
 
-	<?php  
+	<?php
 	// echo $userLoggedIn;
 	$query = mysqli_query($con, "SELECT * FROM friend_requests WHERE user_to='$userLoggedIn'");
 	if(mysqli_num_rows($query) == 0)
@@ -49,7 +49,7 @@ else if($_POST['accept_request'.$user_from] == "Ignore") {
 			echo "seeedak yalla" . $_POST['amr'];
 			echo "something";
 			var_dump($_POST);
-			
+
 
 	?>
 			<form action="requests.php" method="POST">
