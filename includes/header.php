@@ -1,4 +1,4 @@
-<?php  
+<?php
 require 'config/config.php';
 include("includes/classes/User.php");
 include("includes/classes/Post.php");
@@ -38,16 +38,35 @@ if (isset($_SESSION['Email'])){
 			<a href="index.php">SocialNet</a>
 
 		</div>
-		
+
+		<div class="search">
+			<form action="search.php" method="GET" name="search_form">
+					<input type="text" onkeyup="getLiveSearchUsers(this.value,'<?php echo $userLoggedIn; ?>')" name="q" value=""
+					placeholder="Search..." autocomplete="off" id="search_text_input">
+					<div class="button_holder">
+						<img src="assets/images/icons/search_icon.png">
+
+					</div>
+			</form>
+			<div class="search_results">
+			</div>
+
+			<div class="search_results_footer_empty">
+			</div>
+
+		</div>
+
+
+
 		<nav>
 
 			<?php
 
-				//Unread notifications 
+				//Unread notifications
 				$notifications = new Notification($con, $userLoggedIn);
 				$num_notifications = $notifications->getUnreadNumber();
 
-				//Unread notifications 
+				//Unread notifications
 				$user_obj = new User($con, $userLoggedIn);
 				$num_requests = $user_obj->getNumberOfFriendRequests();
 			?>
@@ -127,15 +146,15 @@ if (isset($_SESSION['Email'])){
 					cache:false,
 
 					success: function(response) {
-						$('.dropdown_data_window').find('.nextPageDropdownData').remove(); //Removes current .nextpage 
-						$('.dropdown_data_window').find('.noMoreDropdownData').remove(); //Removes current .nextpage 
+						$('.dropdown_data_window').find('.nextPageDropdownData').remove(); //Removes current .nextpage
+						$('.dropdown_data_window').find('.noMoreDropdownData').remove(); //Removes current .nextpage
 
 
 						$('.dropdown_data_window').append(response);
 					}
 				});
 
-			} //End if 
+			} //End if
 
 			return false;
 
@@ -147,5 +166,3 @@ if (isset($_SESSION['Email'])){
 	</script>
 
 	<div class="wrapper">
-		
-	

@@ -155,7 +155,7 @@ textarea:focus {
 
 
 #comment_iframe {
-	max-height: 250px;	
+	max-height: 250px;
 	width: 100%;
 	margin-top: 5px;
 }
@@ -476,20 +476,30 @@ textarea:focus {
 	margin: 0;
 }
 
+.search{
+	margin: 8px 0 0 15% ;
+}
 
+.search #search_text_input{
+	float: left;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px ;
+	height: 25px ;
+}
 
+.button_holder{
+	background-color: #f1f1f1f1 ;
+	border: thin solid #e5e5e5 ;
+	cursor: pointer;
+	float: left;
+	height: 23px ;
+	text-align: center;
+	width: 50px;
+	border-top-right-radius: 3px;
+	border-bottom-right-radius: 3px ;
+	margin-left: 2px;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+.button_holder img {
+	max-height: 23px ;
+}
