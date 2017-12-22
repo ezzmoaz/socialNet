@@ -163,10 +163,20 @@ class Notification {
 			case 'profile_comment':
 				$message = $userLoggedInName . " commented on your profile post";
 				break;
+			case 'friend_request_accept':
+				$message = $userLoggedInName . " Accepted your friend request";
+				break;	
+			case 'friend_request_ignored':
+				$message = $userLoggedInName . " Ignored your friend request";
+				break;		
 		}
 
+		if ($type != 'friend_request_accept' && $type !='friend_request_ignored'){
 		$link = "post.php?id=" . $post_id;
- 
+ 		}else{
+ 			$link = "profile.php?profile_email=" . $userLoggedIn; ;
+ 		}
+
 		$insert_query = mysqli_query($this->con, "INSERT INTO notifications VALUES('', '$user_to', '$userLoggedIn', '$message', '$link', '$date_time', 'NO', 'NO')");
 	}
 
