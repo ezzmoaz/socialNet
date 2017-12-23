@@ -135,6 +135,7 @@ if(isset($_POST['register_button'])){
         $query = mysqli_query($con, "INSERT INTO `users` VALUES ('$email', '$fName', '$lName', '$nickname', '$password', '$gender', '$DoB', '$profilePic', '$homeTown', '$MState', '$aboutMe', ',', 'NO', '0', '0', '$date')");
 
         array_push($error_array, "<span >Sign UP is successful</span><br>");
+        
 
         //Delete all session variables to disaber after signup
         $_SESSION['reg_FName'] = "";

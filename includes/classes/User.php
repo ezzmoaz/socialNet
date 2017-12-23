@@ -6,11 +6,11 @@
 class User 
 {
 	private $user;
-	private $con;
+	private $conn;
 	
 	function __construct($con, $userEmail)
 	{
-		$this->con = $con;
+		$this->conn = $con;
 		// $user_details_query is a array of result 
 		// echo $userEmail;
 		$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE email='$userEmail'");
@@ -27,40 +27,40 @@ class User
 
 	public function getNumPosts(){
 		$user_email = $this->user['email'];
-		$query = mysqli_query($this->con, "SELECT num_posts FROM users WHERE email='$user_email'");
+		$query = mysqli_query($this->conn, "SELECT num_posts FROM users WHERE email='$user_email'");
 		$row = mysqli_fetch_array($query);
 		return $row['num_posts'];
 	}
 	public function getNumberOfFriendRequests() {
 		$user_email = $this->user['email'];
-		$query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE user_to='$user_email'");
+		$query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_email'");
 		return mysqli_num_rows($query);
 	}
 
 	public function getFirstAndLastName(){
 		$user_email = $this->user['email'];
-		$query = mysqli_query($this->con, "SELECT first_name, last_name FROM users WHERE email='$user_email'");
+		$query = mysqli_query($this->conn, "SELECT first_name, last_name FROM users WHERE email='$user_email'");
 		$row = mysqli_fetch_array($query);
 		return $row['first_name'] . " " . $row['last_name'];
 	}
 
 	public function getProfilePic() {
 		$user_email = $this->user['email'];
-		$query = mysqli_query($this->con, "SELECT profile_pic FROM users WHERE email='$user_email'");
+		$query = mysqli_query($this->conn, "SELECT profile_pic FROM users WHERE email='$user_email'");
 		$row = mysqli_fetch_array($query);
 		return $row['profile_pic'];
 	}
 
 	public function getFriendArray() {
 		$user_email = $this->user['email'];
-		$query = mysqli_query($this->con, "SELECT friend_array FROM users WHERE email='$user_email'");
+		$query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE email='$user_email'");
 		$row = mysqli_fetch_array($query);
 		return $row['friend_array'];
 	}
 
 	public function isClosed(){
 		$user_email = $this->user['email'];
-		$query = mysqli_query($this->con, "SELECT user_closed FROM users WHERE email='$user_email'");
+		$query = mysqli_query($this->conn, "SELECT user_closed FROM users WHERE email='$user_email'");
 		$row = mysqli_fetch_array($query);
 
 		if ($row['user_closed'] == "YES") {
@@ -84,7 +84,7 @@ class User
 
 	public function didReceiveRequest($user_from) {
 		$user_to = $this->user['email'];
-		$check_request_query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND user_from='$user_from'");
+		$check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND user_from='$user_from'");
 		if(mysqli_num_rows($check_request_query) > 0) {
 			return true;
 		}
@@ -95,7 +95,7 @@ class User
 
 	public function didSendRequest($user_to) {
 		$user_from = $this->user['email'];
-		$check_request_query = mysqli_query($this->con, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND user_from='$user_from'");
+		$check_request_query = mysqli_query($this->conn, "SELECT * FROM friend_requests WHERE user_to='$user_to' AND user_from='$user_from'");
 		if(mysqli_num_rows($check_request_query) > 0) {
 			return true;
 		}
@@ -107,20 +107,20 @@ class User
 	public function removeFriend($user_to_remove) {
 		$logged_in_user = $this->user['email'];
 
-		$query = mysqli_query($this->con, "SELECT friend_array FROM users WHERE email='$user_to_remove'");
+		$query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE email='$user_to_remove'");
 		$row = mysqli_fetch_array($query);
 		$friend_array_email = $row['friend_array'];
 		// this replace the user which is sent to this function from friend_array with nothing
 		$new_friend_array = str_replace($user_to_remove . ",", "", $this->user['friend_array']);
-		$remove_friend = mysqli_query($this->con, "UPDATE users SET friend_array='$new_friend_array' WHERE email='$logged_in_user'");
+		$remove_friend = mysqli_query($this->conn, "UPDATE users SET friend_array='$new_friend_array' WHERE email='$logged_in_user'");
 		// this replace the user which is sent to this function from friend_array from the other users
 		$new_friend_array = str_replace($this->user['email'] . ",", "", $friend_array_email);
-		$remove_friend = mysqli_query($this->con, "UPDATE users SET friend_array='$new_friend_array' WHERE email='$user_to_remove'");
+		$remove_friend = mysqli_query($this->conn, "UPDATE users SET friend_array='$new_friend_array' WHERE email='$user_to_remove'");
 	}
 
 	public function sendRequest($user_to) {
 		$user_from = $this->user['email'];
-		$query = mysqli_query($this->con, "INSERT INTO friend_requests VALUES('', '$user_to', '$user_from')");
+		$query = mysqli_query($this->conn, "INSERT INTO friend_requests VALUES('', '$user_to', '$user_from')");
 	}
 
 	public function getMutualFriends($user_to_check) {
@@ -128,7 +128,7 @@ class User
 		$user_array = $this->user['friend_array'];
 		$user_array_explode = explode(",", $user_array);
 
-		$query = mysqli_query($this->con, "SELECT friend_array FROM users WHERE email='$user_to_check'");
+		$query = mysqli_query($this->conn, "SELECT friend_array FROM users WHERE email='$user_to_check'");
 		$row = mysqli_fetch_array($query);
 		$user_to_check_array = $row['friend_array'];
 		$user_to_check_array_explode = explode(",", $user_to_check_array);

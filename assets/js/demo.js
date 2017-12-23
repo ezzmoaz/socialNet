@@ -102,14 +102,17 @@ function getLiveSearchUsers(value, user) {
 	$.post("includes/handlers/ajax_search.php", {query:value, userLoggedIn: user}, function(data) {
 
 		if($(".search_results_footer_empty")[0]) {
+			// this will toogle the classes
 			$(".search_results_footer_empty").toggleClass("search_results_footer");
 			$(".search_results_footer_empty").toggleClass("search_results_footer_empty");
 		}
 
+		//this inject the data inside th html
 		$('.search_results').html(data);
+		//this puts a link a last to go to all results
 		$('.search_results_footer').html("<a href='search.php?q=" + value + "'>See All Results</a>");
 
-		if(data == "") {
+		if(data == "") {//if there is no elements
 			$('.search_results_footer').html("");
 			$('.search_results_footer').toggleClass("search_results_footer_empty");
 			$('.search_results_footer').toggleClass("search_results_footer");
