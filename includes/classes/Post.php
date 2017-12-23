@@ -461,6 +461,7 @@ class Post
 				$body = $row['body'];
 				$added_by = $row['added_by'];
 				$date_time = $row['date_added'];
+				$is_public = $row['is_public'];
 
 				//Prepare user_to string so it can be included even if not posted to a user
 				if($row['user_to'] == "none") {
@@ -478,8 +479,9 @@ class Post
 					return;
 				}
 
-				$user_logged_obj = new User($this->conn, $userLoggedIn);
-				if($user_logged_obj->isFriend($added_by)){
+
+				$user_logged_obj = new User($this->con, $userLoggedIn);
+				if($is_public == 'YES'){
 
 
 					if($userLoggedIn == $added_by)

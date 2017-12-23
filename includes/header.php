@@ -76,9 +76,7 @@ if (isset($_SESSION['Email'])){
 			<a href="index.php">
 				<i class="fa fa-home fa-lg"></i>
 			</a>
-			<a href="#">
-				<i class="fa fa-envelope fa-lg"></i>
-			</a>
+			
 			<a href="javascript:void(0);" onclick="getDropdownData('<?php echo $userLoggedIn; ?>', 'notification')">
 				<i class="fa fa-bell fa-lg"></i>
 				<?php
@@ -93,9 +91,7 @@ if (isset($_SESSION['Email'])){
 				 echo '<span class="notification_badge" id="unread_requests">' . $num_requests . '</span>';
 				?>
 			</a>
-			<a href="#">
-				<i class="fa fa-cog fa-lg"></i>
-			</a>
+			
 			<a href="includes/handlers/logOut.php">
 				<i class="fa fa-sign-out fa-lg"></i>
 			</a>
