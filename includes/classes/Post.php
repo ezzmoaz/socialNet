@@ -6,13 +6,13 @@
 class Post 
 {
 	private $user_obj;
-	private $con;
+	private $conn;
 	private $postId;
 
 	
 	function __construct($con, $user)
 	{
-		$this->con = $con;
+		$this->conn = $con;
 		$this->user_obj = new User($con, $user);
 
 
@@ -24,7 +24,7 @@ class Post
 
 	public function submitPost($body, $user_to){
 		$body = strip_tags($body);
-		$body = mysqli_real_escape_string($this->con, $body);
+		$body = mysqli_real_escape_string($this->conn, $body);
 		$check_empty = preg_replace('/\s+/', '',$body); //deletes all spaces
 
 		if ($check_empty != "") {// make sure that there is a text inside the post
@@ -36,10 +36,10 @@ class Post
 				$user_to = "none";
 			}
 				
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', 'YES' , '')");
+			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', 'YES' , '')");
 			
 
-			$returned_id = mysqli_insert_id($this->con);
+			$returned_id = mysqli_insert_id($this->conn);
 			$this->postId = $returned_id;
 
 
@@ -47,7 +47,7 @@ class Post
 			
 			//Insert Notification if user post to another person 
             if ($user_to != 'none'){
-            	$notification = new Notification($this->con, $added_by);
+            	$notification = new Notification($this->conn, $added_by);
             	$notification->insertNotification($returned_id, $user_to, "profile_post");
             }
 
@@ -57,7 +57,7 @@ class Post
 			//update post count for user
 			$num_posts = $this->user_obj->getNumPosts();
 			$num_posts++;
-			$update_query = mysqli_query($this->con, "UPDATE users SET num_posts='$num_posts' WHERE email='$added_by'");
+			$update_query = mysqli_query($this->conn, "UPDATE users SET num_posts='$num_posts' WHERE email='$added_by'");
 		}
 
 		// if the user to is posting a normal post not to a person
@@ -76,7 +76,7 @@ class Post
 
 
 		$str = ""; //String to return 
-		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='NO' ORDER BY date_added DESC");
+		$data_query = mysqli_query($this->conn, "SELECT * FROM posts WHERE deleted='NO' ORDER BY date_added DESC");
 
 		if(mysqli_num_rows($data_query) > 0) {
 
@@ -97,18 +97,18 @@ class Post
 					$user_to = "";
 				}
 				else {
-					$user_to_obj = new User($con, $row['user_to']);
+					$user_to_obj = new User($this->conn, $row['user_to']);
 					$user_to_name = $user_to_obj->getFirstAndLastName();
-					$user_to = "to <a href='" . $row['user_to'] ."'>" . $user_to_name . "</a>";
+					$user_to = "to <a href='profile.php?profile_email=" . $row['user_to'] ."'>" . $user_to_name . "</a>";
 				}
 
 				//Check if user who posted, has their account closed
-				$added_by_obj = new User($this->con, $added_by);
+				$added_by_obj = new User($this->conn, $added_by);
 				if($added_by_obj->isClosed()) {
 					continue;
 				}
 
-				$user_logged_obj = new User($this->con, $userLoggedIn);
+				$user_logged_obj = new User($this->conn, $userLoggedIn);
 				if($user_logged_obj->isFriend($added_by) || $is_public == "YES"){
 
 				
@@ -130,7 +130,7 @@ class Post
 					else 
 						$delete_button = "";
 
-					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE email='$added_by'");
+					$user_details_query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic FROM users WHERE email='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
 					$first_name = $user_row['first_name'];
 					$last_name = $user_row['last_name'];
@@ -273,7 +273,7 @@ class Post
 
 
 		$str = ""; //String to return 
-		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='NO' AND ((added_by='$profileEmail' AND user_to='none') OR user_to='$profileEmail')  ORDER BY date_added DESC");
+		$data_query = mysqli_query($this->conn, "SELECT * FROM posts WHERE deleted='NO' AND ((added_by='$profileEmail' AND user_to='none') OR user_to='$profileEmail')  ORDER BY date_added DESC");
 
 		if(mysqli_num_rows($data_query) > 0) {
 
@@ -291,7 +291,7 @@ class Post
 				
 
 				//Check if user who posted, has their account closed
-				$added_by_obj = new User($this->con, $added_by);
+				$added_by_obj = new User($this->conn, $added_by);
 				if($added_by_obj->isClosed()) {
 					continue;
 				}
@@ -316,7 +316,7 @@ class Post
 					else 
 						$delete_button = "";
 
-					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE email='$added_by'");
+					$user_details_query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic FROM users WHERE email='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
 					$first_name = $user_row['first_name'];
 					$last_name = $user_row['last_name'];
@@ -449,10 +449,10 @@ class Post
 
 		$userLoggedIn = $this->user_obj->getUserEmail();
 
-		$opened_query = mysqli_query($this->con, "UPDATE notifications SET opened='YES' WHERE user_to='$userLoggedIn' AND link LIKE '%=$post_id'");
+		$opened_query = mysqli_query($this->conn, "UPDATE notifications SET opened='YES' WHERE user_to='$userLoggedIn' AND link LIKE '%=$post_id'");
 
 		$str = ""; //String to return 
-		$data_query = mysqli_query($this->con, "SELECT * FROM posts WHERE deleted='NO' AND id='$post_id'");
+		$data_query = mysqli_query($this->conn, "SELECT * FROM posts WHERE deleted='NO' AND id='$post_id'");
 
 		if(mysqli_num_rows($data_query) > 0) {
 
@@ -468,18 +468,18 @@ class Post
 					$user_to = "";
 				}
 				else {
-					$user_to_obj = new User($this->con, $row['user_to']);
+					$user_to_obj = new User($this->conn, $row['user_to']);
 					$user_to_name = $user_to_obj->getFirstAndLastName();
 					$user_to = "to <a href='" . $row['user_to'] ."'>" . $user_to_name . "</a>";
 				}
 
 				//Check if user who posted, has their account closed
-				$added_by_obj = new User($this->con, $added_by);
+				$added_by_obj = new User($this->conn, $added_by);
 				if($added_by_obj->isClosed()) {
 					return;
 				}
 
-				$user_logged_obj = new User($this->con, $userLoggedIn);
+				$user_logged_obj = new User($this->conn, $userLoggedIn);
 				if($user_logged_obj->isFriend($added_by)){
 
 
@@ -489,7 +489,7 @@ class Post
 						$delete_button = "";
 
 
-					$user_details_query = mysqli_query($this->con, "SELECT first_name, last_name, profile_pic FROM users WHERE email='$added_by'");
+					$user_details_query = mysqli_query($this->conn, "SELECT first_name, last_name, profile_pic FROM users WHERE email='$added_by'");
 					$user_row = mysqli_fetch_array($user_details_query);
 					$first_name = $user_row['first_name'];
 					$last_name = $user_row['last_name'];
@@ -623,7 +623,7 @@ class Post
 	}
 
 	public function MakePrivate($post_id){
-		$query = mysqli_query($this->con, "UPDATE posts SET is_public='NO' WHERE id='$post_id'");
+		$query = mysqli_query($this->conn, "UPDATE posts SET is_public='NO' WHERE id='$post_id'");
 
 	}
 
