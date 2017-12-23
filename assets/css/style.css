@@ -16,12 +16,15 @@ body {
 	width: 100%;
 	min-width: 1050px;
 	height: 40px;
-	background-color: #d35400;
-	border-bottom: 0.25em solid #883804;
+	background-color: #2e3339;
+	border-bottom: 2px solid #e7883d;
 	margin: 0 0 10px 0;
 	display: inline-flex;
 	position: fixed;
 	z-index: 10;
+	border-bottom-left-radius: 4px;
+	border-bottom-right-radius: 4px;
+
 }
 
 .logo a{
@@ -30,12 +33,12 @@ body {
 	font-size: 30;
 	position: relative;
 	top: 9px;
-	text-shadow: #883804 0.5px 0.5px 0px;
-	color: #883804;
+	color: #ffff;
 }
 
 a:hover {
 	text-decoration: none;
+	color: #e7883d;
 }
 
 nav {
@@ -53,8 +56,8 @@ nav a{
 }
 
 nav a:hover {
-	border-bottom: 7px solid #e67e22;
-	color: #fff;
+
+	color: #e7883d;
 }
 
 .wrapper {
@@ -73,18 +76,21 @@ nav a:hover {
 	border-radius: 5px;
 	box-shadow: 2px 2px 1px #D3D3D3;
 	z-index: -1;
+
 }
 
 .user_details {
 	width: 250px;
 	float: left;
 	margin-bottom: 20px;
+
 }
 
 .user_details img {
 	height: 120px;
 	border-radius: 5px;
 	margin-right: 5px;
+	max-width: 175px;
 }
 
 .user_details_left_right {
@@ -100,8 +106,14 @@ nav a:hover {
 	min-height: 160px;
 }
 
+#private_button{
+	margin: 3px;
+}
+
+
 .post_form {
 	width: 100%;
+
 }
 
 .post_form textarea {
@@ -110,8 +122,9 @@ nav a:hover {
 	border-radius: 3px;
 	margin-right: 5px;
 	border: 1px solid #D3D3D3;
-	font-size: 12px;
+	font-size: 17px;
 	padding: 5px;
+	resize: none;
 }
 
 textarea:focus {
@@ -123,14 +136,15 @@ textarea:focus {
 	height: 60px;
 	border: none;
 	border-radius: 3px;
-	background-color: #d35400;
 	font-family: 'Bellota-BoldItalic', sans-serif;
-	color: #883804;
+	color: #ffff;
 	text-shadow: #883804 0.5px 0.5px 0px;
 	font-size: 90%;
 	position: absolute;
 	outline: 0;
 	margin: 0;
+	background-color: #2e3339;
+	font-size: 20px;
 }
 
 .post_form input[type="submit"]:active {
@@ -147,6 +161,7 @@ textarea:focus {
 .post_profile_pic {
 	float: left;
 	margin-right: 7px;
+
 }
 
 .post_profile_pic img {
@@ -225,26 +240,31 @@ textarea:focus {
 	width: 17%;
 	max-width: 240px;
 	min-width: 130px;
-	height: 100%;
+	height: 50%;
 	float: left;
 	position: relative;
-	background-color: #d35400;
-	border-right: 10px solid #883804;
-	color: #CBEAF8;
+	background-color: #2e3339;
+	color: #2e3339;
 	margin-right: 20px;
+	border-radius: 10px;
+	margin-top: 10px ;
+	margin-left: 10px
+
 }
 
 .profile_left img {
 	min-width: 80px;
 	width: 55%;
-	margin: 20px;
-	border: 1px solid #883804;
+	margin: 10px;
+	border: 0px solid #883804;
 	border-radius: 10px;
+	position: center;
+
 }
 
 .profile_info {
 	display: list-item;
-	background-color: #883804;
+	background-color: #ffff;
 	width: 100%;
 	padding: 10px 0 10px 0;
 }
@@ -280,6 +300,8 @@ textarea:focus {
 	margin: 7px 0 0 7px;
 	border: none;
 	color: #fff;
+	background-color: #e7883d;
+
 }
 
 
@@ -573,5 +595,11 @@ textarea:focus {
     color: #fff;
 }
 
-
-
+.modal{
+	display: none;
+}
+.form-control{
+	resize: none;
+	width: 520px;
+	height: 100px;
+}

@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("includes/header.php");
 
 if(isset($_GET['profile_email'])) {
@@ -13,7 +13,7 @@ if(isset($_GET['profile_email'])) {
 	$user_main = new User($con, $userLoggedIn);
 	$num_friends = (substr_count($user_array['friend_array'], ",")) - 1;
 }
-	
+
 
 
 
@@ -34,7 +34,7 @@ if(isset($_POST['add_friend'])) {
 if(isset($_POST['respond_request'])) {
 
 	header("Location: requests.php");
-	
+
 }
 
  ?>
@@ -46,10 +46,10 @@ if(isset($_POST['respond_request'])) {
 	 	}
 
  	</style>
-	
+
  	<div class="profile_left">
  		<a href="upload.php"><img src="<?php echo $user_array['profile_pic']; ?>"></a>
- 		
+
 
  		<div class="profile_info">
  			<p><?php echo "Posts: " . $user_array['num_posts']; ?></p>
@@ -62,14 +62,14 @@ if(isset($_POST['respond_request'])) {
  		</div>
 
  		<form action="<?php echo "profile.php?profile_email=" . $email; ?>" method="POST">
- 			<?php 
+ 			<?php
  			// if the user is closed go to user_closed.php
- 			$profile_user_obj = new User($con, $email); 
+ 			$profile_user_obj = new User($con, $email);
  			if($profile_user_obj->isClosed()) {
  				header("Location: user_closed.php");
  			}
 
- 			$logged_in_user_obj = new User($con, $userLoggedIn); 
+ 			$logged_in_user_obj = new User($con, $userLoggedIn);
 
  			if($userLoggedIn != $email) {
  				// show the addFrind button if is not friend
@@ -83,7 +83,7 @@ if(isset($_POST['respond_request'])) {
  				else if ($logged_in_user_obj->didSendRequest($email)) {
  					echo '<input type="submit" name="" class="default" value="Request Sent"><br>';
  				}
- 				else 
+ 				else
  					echo '<input type="submit" name="add_friend" class="success" value="Add Friend"><br>';
  			}
 
@@ -91,14 +91,12 @@ if(isset($_POST['respond_request'])) {
  		</form>
  		<input type="submit" class="deep_blue" data-toggle="modal" data-target="#post_form" value="Post Something">
 
-    <?php  
+    <?php
     if($userLoggedIn != $email) {
       echo '<div class="profile_info_bottom">';
         echo $logged_in_user_obj->getMutualFriends($email) . " Mutual friends";
       echo '</div>';
     }
-
-
     ?>
 
  	</div>
@@ -146,7 +144,7 @@ if(isset($_POST['respond_request'])) {
 <script >
 		var userLoggedIn = '<?php echo $userLoggedIn; ?>';
 		var profileEmail = '<?php echo $email; ?>';
-		//jquery 
+		//jquery
 
 		$(document).ready(function(){
 			$('#loading').show();
@@ -183,8 +181,8 @@ if(isset($_POST['respond_request'])) {
 
 					success: function(response) {
 						// alert("hel2")
-						$('.posts_area').find('.nextPage').remove(); //Removes current .nextpage 
-						$('.posts_area').find('.noMorePosts').remove(); //Removes current .noMorePosts 
+						$('.posts_area').find('.nextPage').remove(); //Removes current .nextpage
+						$('.posts_area').find('.noMorePosts').remove(); //Removes current .noMorePosts
 						$('#loading').hide();
 						$('.posts_area').append(response);
 					}

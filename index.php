@@ -1,4 +1,4 @@
-<?php 
+<?php
 include("includes/header.php");
 
 
@@ -10,7 +10,7 @@ if(isset($_POST['post2'])){
 		$postId = $post->getPostId();
 		$post->makePrivate($postId);
 	}
-	
+
 	header("Location: index.php");
 }
 
@@ -20,16 +20,16 @@ if(isset($_POST['post2'])){
 		<a href="<?php echo "profile.php?profile_email=" . $user['email']; ?> "><img src="<?php echo $user['profile_pic']; ?>"></a>
 
 		<div class="user_details_left_right">
-			
-		
+
+
 
 			<a href="<?php echo "profile.php?profile_email=" . $user['email']; ?> ">
-			<?php 
+			<?php
 			echo $user['first_name'] . " " . $user['last_name'] . "<br>";
 			?>
 			</a>
 
-			<?php 
+			<?php
 			echo "Posts: " . $user['num_posts'] . "<br>";
 			echo "Likes: " . $user['num_likes'];
 			?>
@@ -38,10 +38,10 @@ if(isset($_POST['post2'])){
 
 	<div class="main_column column">
 		<form class="post_form" action="index.php" method="POST">
-			<textarea name="post_text" id="post_text" placeholder="What's On Your Mind?"></textarea>
+			<textarea name="post_text" id="post_text" placeholder=" What's On Your Mind?"></textarea>
 			<input type="submit" name="post2" id="post_button" value="Post">
 			<br>
-			<input type="checkbox" name="is_public" value="YES" >Is Private?<br>
+			<input type="checkbox" name="is_public" value="YES" id="private_button"> Is private?<br>
 		</form>
 
 		 <div class="posts_area"></div>
@@ -51,7 +51,7 @@ if(isset($_POST['post2'])){
 
 	<script >
 		var userLoggedIn = '<?php echo $userLoggedIn; ?>';
-		//jquery 
+		//jquery
 
 		$(document).ready(function(){
 			$('#loading').show();
@@ -88,8 +88,8 @@ if(isset($_POST['post2'])){
 
 					success: function(response) {
 						// alert("hel2")
-						$('.posts_area').find('.nextPage').remove(); //Removes current .nextpage 
-						$('.posts_area').find('.noMorePosts').remove(); //Removes current .noMorePosts 
+						$('.posts_area').find('.nextPage').remove(); //Removes current .nextpage
+						$('.posts_area').find('.noMorePosts').remove(); //Removes current .noMorePosts
 						$('#loading').hide();
 						$('.posts_area').append(response);
 					}
