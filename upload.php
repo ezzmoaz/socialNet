@@ -43,7 +43,7 @@ if(isset($_FILES['fileToUpload'])){
             mysqli_query($con, "UPDATE users SET profile_pic = '$target_file' WHERE email='$userLoggedIn'");
             $post = new Post($con, $userLoggedIn);
 	        $post->submitPost("new pp bl sala 3l nabi", 'none', 'NO');
-            header("Location: /sn/", true, 301);
+            header("Location: /socialNet/", true, 301);
             //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         } else {
             echo "Sorry, there was an error uploading your file.";

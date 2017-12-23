@@ -34,7 +34,7 @@ class Post
 				$user_to = "none";
 			}
 				
-			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', '$is_public' , '')");
+			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', '$is_public' , '')");
 
 			
 
