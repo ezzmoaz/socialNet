@@ -14,15 +14,13 @@ class Post
 	{
 		$this->conn = $con;
 		$this->user_obj = new User($con, $user);
-
-
 	}
 
 	public function getPostId(){
 		return $this->postId;
 	}
 
-	public function submitPost($body, $user_to){
+	public function submitPost($body, $user_to, $is_public = 'YES'){
 		$body = strip_tags($body);
 		$body = mysqli_real_escape_string($this->conn, $body);
 		$check_empty = preg_replace('/\s+/', '',$body); //deletes all spaces
@@ -36,7 +34,8 @@ class Post
 				$user_to = "none";
 			}
 				
-			$query = mysqli_query($this->conn, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', 'YES' , '')");
+			$query = mysqli_query($this->con, "INSERT INTO posts VALUES('','$body', '$added_by', '$user_to', 'NO', 'NO', '0', '$date_added', '$is_public' , '')");
+
 			
 
 			$returned_id = mysqli_insert_id($this->conn);

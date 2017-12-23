@@ -42,10 +42,6 @@ if(isset($_POST['post2'])){
 			<input type="submit" name="post2" id="post_button" value="Post">
 			<br>
 			<input type="checkbox" name="is_public" value="YES" >Is Private?<br>
-
-
-		
-			
 		</form>
 
 		 <div class="posts_area"></div>
