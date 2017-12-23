@@ -1,6 +1,6 @@
 <?php  
 include("includes/header.php");
-include("config/config.php");
+// include("config/config.php");
 
 if(isset($_GET['id'])) {
 	$id = $_GET['id'];

@@ -259,6 +259,7 @@ textarea:focus {
 	border: 0px solid #883804;
 	border-radius: 10px;
 	position: center;
+	margin-left: 35px;
 
 }
 
@@ -300,7 +301,7 @@ textarea:focus {
 	margin: 7px 0 0 7px;
 	border: none;
 	color: #fff;
-	background-color: #e7883d;
+	/*background-color: #e7883d;*/
 
 }
 
@@ -343,7 +344,8 @@ textarea:focus {
 }
 
 .profile_info_bottom {
-	margin: 10 0 0 7px;
+	margin: 10 0 0 32px;
+	color: #fff;
 
 }
 

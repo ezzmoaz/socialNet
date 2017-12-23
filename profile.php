@@ -122,11 +122,12 @@ if(isset($_POST['respond_request'])) {
       <div class="modal-body">
       	<p>This will appear on the user's profile page and also their newsfeed for your friends to see!</p>
 
-      	<form class="profile_post" action="" method="POST">
+      	<form class="profile_post" action="" method="POST" enctype="multipart/form-data">
       		<div class="form-group">
       			<textarea class="form-control" name="post_body"></textarea>
       			<br>
 				<input type="checkbox" name="is_public2" value="YES" >Is Private?<br>
+				<input type="file" name="fileToUpload" id="fileToUpload">
       			<input type="hidden" name="user_from" value="<?php echo $userLoggedIn; ?>">
       			<input type="hidden" name="user_to" value="<?php echo $email; ?>">
       		</div>
