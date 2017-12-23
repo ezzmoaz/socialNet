@@ -61,6 +61,8 @@ function getUsers(value, user) {
 
 function getDropdownData(user, type) {
 
+	init = 0;
+
 	if($(".dropdown_data_window").css("height") == "0px") {
 
 		var pageName;
