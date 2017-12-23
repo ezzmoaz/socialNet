@@ -1,9 +1,9 @@
-<?php 
+<?php
 
 /**
-* 
+*
 */
-class User 
+class User
 {
 	private $user;
 	private $conn;
@@ -12,6 +12,7 @@ class User
 	{
 		$this->conn = $con;
 		// $user_details_query is a array of result 
+
 		// echo $userEmail;
 		$user_details_query = mysqli_query($con, "SELECT * FROM users WHERE email='$userEmail'");
 		if (!$user_details_query) {
@@ -153,6 +154,7 @@ class User
 		return $user_array_explode;
 
 	}
+	
 
 }
  ?>
