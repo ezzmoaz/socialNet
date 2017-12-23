@@ -158,6 +158,30 @@ if (isset($_SESSION['Email'])){
 
 	});
 
+    var initSet = false;
+	var init = <? echo $num_notifications ?>;
+	function loadlink(){
+    	$.ajax({
+			url: "includes/handlers/ajax_load_num_notifications.php",
+			type: "GET",
+			cache:false,
+
+			success: function(data) {
+				if(data >  init){
+					window.location.reload();
+				}
+			}
+		});
+
+
+
+	}
+
+	// loadlink(); // This will run on page load
+	setInterval(function(){
+	 loadlink() // this will run after every 5 seconds
+	}, 500);
+
 	</script>
 
 	<div class="wrapper">
