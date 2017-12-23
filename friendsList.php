@@ -1,21 +1,19 @@
 <?php
 include("includes/header.php");
 
-if(isset($_GET['id'])) {
-	$id = $_GET['id'];
+if(isset($_GET['email'])) {
+	$email = $_GET['email'];
 }
 else {
-	$id = 0;
+	echo "There is no user to get friends...";
 }
 
 ?>
 
+<?php  
+    $logged_in_user_obj = new User($con, $email); 
+    $user_freind_array = $logged_in_user_obj->getFriends($email);
 
-<?php
-
-    $logged_in_user_obj = new User($con, $userLoggedIn);
-
-    $user_freind_array = $logged_in_user_obj->getFriends($userLoggedIn);
     foreach($user_freind_array as $j) {
 			if ($j != ""){ ?>
 

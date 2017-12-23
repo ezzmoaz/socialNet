@@ -10,6 +10,10 @@ if(isset($_POST['post_body'])) {
 
 	$post = new Post($con, $_POST['user_from']);
 	$post->submitPost($_POST['post_body'], $_POST['user_to']);
+	if(isset($_POST['is_public2'])){
+		$postId = $post->getPostId();
+		$post->makePrivate($postId);
+	}
 }
 	
 ?>

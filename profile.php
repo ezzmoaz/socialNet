@@ -48,13 +48,13 @@ if(isset($_POST['respond_request'])) {
  	</style>
 
  	<div class="profile_left">
- 		<a href="upload.php"><img src="<?php echo $user_array['profile_pic']; ?>"></a>
-
+ 		<a href="<?php if($userLoggedIn == $user_array['email']) echo 'upload.php'?>"><img src="<?php echo $user_array['profile_pic']; ?>"></a>
+ 		
 
  		<div class="profile_info">
  			<p><?php echo "Posts: " . $user_array['num_posts']; ?></p>
  			<p><?php echo "Likes: " . $user_array['num_likes']; ?></p>
- 			<p><a href="friendsList.php">
+ 			<p><a href="friendsList.php?email=<?php echo $user_array['email'] ?>">
 				<?php echo "Friends: " . $num_friends ?>
 			</a></p>
 			<p><?php if($user_main->isFriend($email))echo "About Me: " . $user_array['about_me']; ?></p>
@@ -125,6 +125,8 @@ if(isset($_POST['respond_request'])) {
       	<form class="profile_post" action="" method="POST">
       		<div class="form-group">
       			<textarea class="form-control" name="post_body"></textarea>
+      			<br>
+				<input type="checkbox" name="is_public2" value="YES" >Is Private?<br>
       			<input type="hidden" name="user_from" value="<?php echo $userLoggedIn; ?>">
       			<input type="hidden" name="user_to" value="<?php echo $email; ?>">
       		</div>
