@@ -7,11 +7,18 @@ if(isset($_GET['email'])) {
 else {
 	echo "There is no user to get friends...";
 }
+$logged_in_user_obj = new User($con, $email); 
+if(isset($_POST['remove_friend'])) {
+	$friend = strip_tags($_POST['friend']);
+	echo $friend ;
+$logged_in_user_obj->removeFriend($friend);
+header("Location: friendsList.php?email=" . $email);
+}
 
 ?>
 
 <?php  
-    $logged_in_user_obj = new User($con, $email); 
+    
     $user_freind_array = $logged_in_user_obj->getFriends($email);
 
     foreach($user_freind_array as $j) {
@@ -47,10 +54,13 @@ else {
  					?>
 
 					<form action="friendsList.php" method="POST">
-					<input type="hidden" name="friend" value="<?php echo $my_friend->getUserEmail(); ?>"  />
-					<input type="submit" name="remove_friend" class="danger" value="Remove Friend"><br>
+					
+					<!-- <input type="submit" name="remove_friend" class="danger" value="Remove Friend"><br> -->
+					<!-- <input type="hidden" name="friend" value="<?php echo $my_friend->getUserEmail(); ?>"  /> -->
 					</form>
+
 					<?php
+					
  				}
 
 							?>
@@ -60,10 +70,5 @@ else {
 					<?php
 	}
 }
-if(isset($_POST['remove_friend'])) {
-	$friend = strip_tags($_POST['friend']);
-	echo $friend ;
-$logged_in_user_obj->removeFriend($friend);
-header("Location: friendsList.php" . $email);
-}
+
 ?>

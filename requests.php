@@ -23,7 +23,7 @@ include("includes/header.php"); //Header
 			// echo $user_from;
 			// echo !isset($_POST['accept_request' . $user_from]);
 
-			echo "something";
+			// echo "something";
 			//var_dump($_POST);
 	?>
 			<form action="requests.php" method="POST">
@@ -36,7 +36,7 @@ include("includes/header.php"); //Header
 
 	//$user_from = $_POST["user"];
 	if(isset($_POST["accept"])) {
-		if ($_POST["user"] ==$user_from ){
+		if ($_POST["user"] == $user_from ){
 		$user_from = strip_tags($_POST['user']);
 
 		$add_friend_query = mysqli_query($con, "UPDATE users SET friend_array=CONCAT(friend_array, '$user_from,') WHERE email='$userLoggedIn'");
