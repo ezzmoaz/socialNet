@@ -306,7 +306,10 @@ class Post
 					continue;
 				}
 
-
+				if(!$added_by_obj->isFriend($userLoggedIn)) {
+					if($is_public == 'NO')
+						continue;
+				}
 				
 
 					if($num_iterations++ < $start)

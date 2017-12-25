@@ -48,7 +48,7 @@ if(isset($_POST['respond_request'])) {
  	</style>
 
  	<div class="profile_left">
- 		<a href="<?php if($userLoggedIn == $user_array['email']) echo 'upload.php'?>"><img src="<?php echo $user_array['profile_pic']; ?>"></a>
+ 		<a href="<?php if($userLoggedIn == $user_array['email']) echo 'settings.php'?>"><img src="<?php echo $user_array['profile_pic']; ?>"></a>
  		
 
  		<div class="profile_info">

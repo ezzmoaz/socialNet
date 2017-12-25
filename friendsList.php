@@ -60,7 +60,7 @@ header("Location: friendsList.php?email=" . $email);
 					</form>
 
 					<?php
-					
+
  				}
 
 							?>

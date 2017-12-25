@@ -8,7 +8,7 @@ if(isset($_FILES['fileToUpload'])){
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     // Check if image file is a actual image or fake image
-    if(isset($_POST["submit"])) {
+    if(isset($_POST["submit"]) && ($_FILES["fileToUpload"]["tmp_name"] != '')) {
         $check = getimagesize($_FILES["fileToUpload"]["tmp_name"]);
         if($check !== false) {
             echo "File is an image - " . $check["mime"] . ".";
@@ -43,7 +43,7 @@ if(isset($_FILES['fileToUpload'])){
             mysqli_query($con, "UPDATE users SET profile_pic = '$target_file' WHERE email='$userLoggedIn'");
             $post = new Post($con, $userLoggedIn);
 	        $post->submitPost("new pp bl sala 3l nabi", 'none', '', 'NO');
-            header("Location: /socialNet/", true, 301);
+            header("Location: /SocialNet/", true, 301);
             //echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
         } else {
             echo "Sorry, there was an error uploading your file.";
